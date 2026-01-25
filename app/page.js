@@ -28,12 +28,12 @@ export default function Home() {
     <div className="flex grainy min-h-screen">
       <Sidebar />
       
-      <main className="flex-1 lg:ml-64 p-6 md:p-12 lg:p-20">
-        <div className="max-w-6xl mx-auto space-y-12">
+      <main className="flex-1 lg:ml-64 w-full p-6 pt-24 md:p-12 lg:p-20 transition-all duration-300">
+        <div className="max-w-6xl mx-auto space-y-8 md:space-y-12">
           
           {/* Hero Section - Bento Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <section className="md:col-span-2 bento-card p-10 flex flex-col justify-end min-h-[400px] relative bg-gradient-to-br from-card to-background">
+            <section className="md:col-span-2 bento-card p-6 md:p-10 flex flex-col justify-end min-h-[400px] relative bg-gradient-to-br from-card to-background">
               <div className="absolute top-10 left-10">
                 <div className="px-3 py-1 rounded-full border border-border bg-background/50 backdrop-blur-sm text-[10px] font-bold uppercase tracking-wider inline-block text-accent">Based in Indonesia</div>
               </div>
@@ -47,7 +47,7 @@ export default function Home() {
             </section>
             
             <div className="space-y-6">
-              <div className="bento-card p-8 flex flex-col items-center justify-center text-center bg-card">
+              <div className="bento-card p-6 md:p-8 flex flex-col items-center justify-center text-center bg-card">
                 <div className="w-20 h-20 rounded-full overflow-hidden mb-6 border-2 border-accent/20 p-1 shadow-inner">
                   <Image src="/profile.png" alt="Profile" width={80} height={80} className="rounded-full object-cover" />
                 </div>
@@ -71,7 +71,7 @@ export default function Home() {
                 </div>
               </div>
               
-              <div className="bento-card p-8 bg-card border-accent/20">
+              <div className="bento-card p-6 md:p-8 bg-card border-accent/20 min-w-0">
                 <h3 className="text-muted font-bold text-[10px] mb-4 uppercase tracking-widest">Current Stack</h3>
                 <div className="flex flex-wrap gap-2">
                   {['Kotlin', 'Java', 'JavaScript', 'React', 'HTML', 'CSS', 'Android', 'GitHub'].map(s => (
@@ -86,7 +86,7 @@ export default function Home() {
 
           {/* Now / Activity Section */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bento-card p-8">
+            <div className="bento-card p-8 min-w-0">
               <div className="flex items-center gap-2 mb-6">
                 <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
                 <h3 className="font-bold uppercase text-[10px] tracking-widest text-muted-foreground">Now</h3>
@@ -258,7 +258,7 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {projects.map((project) => (
                 <Link key={project.slug} href={`/projects/${project.slug}`} className="group block h-full">
-                  <div className="bento-card h-full flex flex-col group-hover:border-white/20">
+                  <div className="bento-card h-full flex flex-col group-hover:border-white/20 min-w-0 overflow-hidden">
                     <div className="relative aspect-video overflow-hidden">
                       <Image 
                         src={project.frontmatter.image} 

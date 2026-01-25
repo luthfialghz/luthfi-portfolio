@@ -13,12 +13,15 @@ import {
   Linkedin,
   Mail,
   Zap,
-  ExternalLink
+  ExternalLink,
+  Menu,
+  X
 } from 'lucide-react';
 import { clsx } from 'clsx';
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const [isOpen, setIsOpen] = React.useState(false);
 
   const navItems = [
     { name: 'Home', href: '/', icon: <Home size={20} /> },
@@ -37,26 +40,38 @@ export default function Sidebar() {
 
   return (
     <>
-      {/* Mobile Nav */}
-      <nav className="lg:hidden fixed top-0 left-0 right-0 h-16 border-b border-border bg-background/80 backdrop-blur-md z-50 flex items-center justify-between px-6">
-        <div className="flex items-center gap-3">
-           <div className="w-8 h-8 rounded-lg bg-white overflow-hidden flex items-center justify-center border border-border shadow-sm">
-            <Image src="/brand-logo-y2k.png" alt="Logo" width={24} height={24} className="object-cover" />
+      {/* Mobile Nav Header */}
+      <nav className="lg:hidden fixed top-0 left-0 right-0 h-16 border-b border-border bg-background/80 backdrop-blur-md z-50 flex items-center justify-between px-4 sm:px-6 transition-all duration-300">
+        <Link href="/" className="flex items-center gap-3 overflow-hidden" onClick={() => setIsOpen(false)}>
+           <div className="w-9 h-9 rounded-xl bg-black overflow-hidden flex items-center justify-center border border-border shadow-sm shrink-0">
+            <Image src="/y2k-brand-logo-black.png" alt="Logo" width={28} height={28} className="object-cover" />
           </div>
-          <span className="font-bold text-sm tracking-tighter text-foreground leading-none">
-            Luthfi Yafi <span className="block text-[10px] text-muted font-medium">Alfiansyah</span>
-          </span>
-        </div>
-        <button className="p-2 border border-border rounded-lg">
-          <Zap size={18} />
+          <div className="flex flex-col min-w-0">
+            <span className="font-bold text-sm tracking-tight text-foreground truncate">
+              Luthfi Yafi Alfiansyah
+            </span>
+            <span className="text-[10px] text-muted font-medium truncate">
+              Associate Software Dev. Engineer
+            </span>
+          </div>
+        </Link>
+        <button 
+          className="p-2 -mr-2 text-foreground/80 hover:text-foreground active:scale-95 transition-transform"
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label="Toggle Menu"
+        >
+          {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </nav>
 
-      {/* Desktop Sidebar */}
-      <aside className="fixed left-0 top-0 h-screen w-64 hidden lg:flex flex-col border-r border-border bg-sidebar/50 backdrop-blur-xl p-8 z-50">
+      {/* Sidebar (Desktop & Mobile Drawer) */}
+      <aside className={clsx(
+        "fixed left-0 top-0 h-screen w-64 flex flex-col border-r border-border bg-sidebar/95 backdrop-blur-xl p-8 z-40 transition-transform duration-300 ease-in-out lg:translate-x-0 lg:z-0",
+        isOpen ? "translate-x-0 pt-24" : "-translate-x-full lg:pt-8"
+      )}>
         <div className="mb-12 px-2 flex flex-col gap-4 text-foreground">
           <div className="w-20 h-20 rounded-xl bg-black overflow-hidden flex items-center justify-center shadow-2xl border border-white/10 group">
-            <Image src="/brand-logo-y2k.png" alt="LYA Y2K Logo" width={80} height={80} className="object-cover scale-125 transition-transform group-hover:scale-150 duration-500" />
+            <Image src="/y2k-brand-logo-black.png" alt="LYA Y2K Logo" width={80} height={80} className="object-cover scale-125 transition-transform group-hover:scale-150 duration-500" />
           </div>
           <div>
             <span className="font-bold text-lg tracking-tighter leading-tight block">Luthfi Yafi Alfiansyah</span>
@@ -70,6 +85,7 @@ export default function Sidebar() {
             <Link 
               key={item.name} 
               href={item.href}
+              onClick={() => setIsOpen(false)}
               className={clsx(
                 "sidebar-link group",
                 pathname === item.href && "active"
@@ -101,6 +117,14 @@ export default function Sidebar() {
           </div>
         </div>
       </aside>
+      
+      {/* Mobile Overlay */}
+      {isOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-30 lg:hidden backdrop-blur-sm"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
     </>
   );
 }

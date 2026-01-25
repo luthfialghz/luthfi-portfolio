@@ -2,13 +2,13 @@
 @plugin "@tailwindcss/typography";
 
 :root {
-  --background: #ffffff;
-  --foreground: #000000;
-  --sidebar: #fafafa;
+  --background: #fafafa;
+  --foreground: #171717;
+  --sidebar: #f4f4f5;
   --card: #ffffff;
-  --border: #eeeeee;
+  --border: #e4e4e7;
   --accent: #57B4BA; /* Keep teal as a subtle accent */
-  --muted: #888888;
+  --muted: #737373;
 }
 
 @theme inline {
@@ -90,14 +90,12 @@ body {
   display: none;
 }
 
-.multiply-blend {
-  mix-blend-mode: multiply;
+.multiply.screen-blend {
+  mix-blend-mode: screen;
 }
 
 .dark .multiply-blend {
   filter: brightness(1.2) contrast(1.1);
 }
-
-
 
 

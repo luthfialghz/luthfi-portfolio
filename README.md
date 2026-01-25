@@ -18,6 +18,25 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
+## Content Management (Projects)
+
+This portfolio uses a file-based CMS using **MDX**. All project content is stored in the `content/projects` directory.
+
+### Adding a New Project
+1. Create a new `.mdx` file in `content/projects/` (e.g., `my-new-project.mdx`).
+2. Add the required Frontmatter at the top:
+   ```yaml
+   ---
+   title: "Project Title"
+   description: "Short description for the card."
+   date: "YYYY-MM-DD"
+   tags: ["Tag1", "Tag2"]
+   image: "/projects/your-image.png"
+   ---
+   ```
+3. Write your project details using Markdown/MDX below the dashes.
+4. Place project images in `public/projects/`.
+
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
 ## Learn More

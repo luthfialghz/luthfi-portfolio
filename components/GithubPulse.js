@@ -39,6 +39,9 @@ export default function GithubPulse({ username }) {
           hideColorLegend
           hideTotalCount
           loading={<div className="animate-pulse bg-muted/10 w-full h-full rounded-lg"></div>}
+          transformData={(data) => {
+            return data;
+          }}
         />
       </div>
       
