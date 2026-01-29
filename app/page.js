@@ -18,7 +18,7 @@ import {
   LucideIcon
 } from "lucide-react";
 
-import GithubPulse from "@/components/GithubPulse";
+import GithubActivity from "@/components/GithubActivity";
 
 export default function Home() {
   const projects = getAllProjects();
@@ -96,7 +96,7 @@ export default function Home() {
               </p>
             </div>
             
-            <GithubPulse username={githubUsername} />
+            <GithubActivity username={githubUsername} />
           </div>
 
           {/* Experience Section */}
