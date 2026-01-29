@@ -257,32 +257,55 @@ export default function Home() {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {projects.map((project) => (
-                <Link key={project.slug} href={`/projects/${project.slug}`} className="group block h-full">
-                  <div className="bento-card h-full flex flex-col group-hover:border-white/20 min-w-0 overflow-hidden">
-                    <div className="relative aspect-video overflow-hidden">
-                      <Image 
-                        src={project.frontmatter.image} 
-                        alt={project.frontmatter.title}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
-                    </div>
-                    <div className="p-8">
-                      <div className="flex justify-between items-start mb-4">
-                        <h3 className="text-xl font-bold">{project.frontmatter.title}</h3>
-                        <ArrowUpRight size={20} className="text-muted-foreground group-hover:text-foreground transition-all group-hover:translate-x-1 group-hover:-translate-y-1" />
+                <div key={project.slug} className="group relative bento-card h-full flex flex-col group-hover:border-white/20 min-w-0 overflow-hidden transition-all duration-300">
+                  <Link href={`/projects/${project.slug}`} className="block relative aspect-video overflow-hidden">
+                    <Image 
+                      src={project.frontmatter.image} 
+                      alt={project.frontmatter.title}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  </Link>
+                  <div className="p-8 flex-1 flex flex-col">
+                    <div className="flex justify-between items-start mb-4">
+                      <Link href={`/projects/${project.slug}`}>
+                        <h3 className="text-xl font-bold group-hover:text-accent transition-colors">{project.frontmatter.title}</h3>
+                      </Link>
+                      <div className="flex gap-3">
+                        {project.frontmatter.github && (
+                          <a href={project.frontmatter.github} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors p-1" title="GitHub">
+                            <Github size={18} />
+                          </a>
+                        )}
+                        {project.frontmatter.external && (
+                          <a href={project.frontmatter.external} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors p-1" title="Live Demo">
+                            <ExternalLink size={18} />
+                          </a>
+                        )}
                       </div>
-                      <p className="text-muted-foreground text-sm line-clamp-2 leading-relaxed">
-                        {project.frontmatter.description}
-                      </p>
-                      <div className="mt-6 flex flex-wrap gap-3">
+                    </div>
+                    <p className="text-muted-foreground text-sm line-clamp-2 leading-relaxed mb-6">
+                      {project.frontmatter.description}
+                    </p>
+                    <div className="mt-auto flex justify-between items-center">
+                      <div className="flex flex-wrap gap-3">
                         {project.frontmatter.tags.slice(0, 3).map(tag => (
                           <span key={tag} className="text-[10px] font-bold uppercase tracking-wider text-foreground/40">#{tag}</span>
                         ))}
                       </div>
+                      {project.frontmatter.url && (
+                        <a 
+                          href={project.frontmatter.url} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="text-xs font-bold uppercase tracking-widest text-accent hover:underline flex items-center gap-1"
+                        >
+                          Launch <ArrowUpRight size={12} />
+                        </a>
+                      )}
                     </div>
                   </div>
-                </Link>
+                </div>
               ))}
             </div>
           </section>

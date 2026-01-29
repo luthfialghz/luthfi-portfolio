@@ -3,7 +3,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import Sidebar from "@/components/Sidebar";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, ExternalLink, Github } from "lucide-react";
+import { ArrowLeft, ExternalLink, Github, ArrowUpRight } from "lucide-react";
 
 export async function generateStaticParams() {
   const slugs = getProjectSlugs();
@@ -42,12 +42,36 @@ export default async function ProjectPage({ params }) {
               </div>
               <div className="h-4 w-[1px] bg-border hidden sm:block"></div>
               <div className="flex gap-4">
-                <a href="#" className="p-2 border border-border rounded-full hover:bg-foreground hover:border-foreground hover:text-background transition-all">
-                  <Github size={18} />
-                </a>
-                <a href="#" className="p-2 border border-border rounded-full hover:bg-foreground hover:border-foreground hover:text-background transition-all">
-                  <ExternalLink size={18} />
-                </a>
+                {project.frontmatter.github && (
+                  <a 
+                    href={project.frontmatter.github} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="p-2 border border-border rounded-full hover:bg-foreground hover:border-foreground hover:text-background transition-all"
+                  >
+                    <Github size={18} />
+                  </a>
+                )}
+                {project.frontmatter.external && (
+                  <a 
+                    href={project.frontmatter.external} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="p-2 border border-border rounded-full hover:bg-foreground hover:border-foreground hover:text-background transition-all"
+                  >
+                    <ExternalLink size={18} />
+                  </a>
+                )}
+                {project.frontmatter.url && (
+                  <a 
+                    href={project.frontmatter.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="px-6 py-2 bg-accent text-accent-foreground rounded-full font-bold text-sm hover:opacity-90 transition-all flex items-center gap-2"
+                  >
+                    View Project <ArrowUpRight size={16} />
+                  </a>
+                )}
               </div>
             </div>
           </header>
